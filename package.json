@@ -3,13 +3,10 @@
   "displayName": "GK Flutter GetX Pattern",
   "publisher": "GnyKoua",
   "description": "GK custom flutter design pattern using GetX",
-  "repository": {
-    "type": "public",
-    "url": "git@github.com:GnyKoua/GK-FLUTTER-GETX-VSCODE-EXTENSION.git"
-  },
-  "icon": "./images/avatar.png",
+  "repository": "https://github.com/GnyKoua/GK-FLUTTER-GETX-VSCODE-EXTENSION.git",
+  "icon": "images/avatar.png",
   "badges": [],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.76.0"
   },

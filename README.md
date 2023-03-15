@@ -1,6 +1,6 @@
 # GK flutter GetX pattern README
 
-This is the README for your extension "gk-flutter-getx-pattern". After writing up a brief description, we recommend including the following sections.
+Flutter project using GetX organisation by ~GnyKoua~
 
 ## Features
 * GK flutter GetX init
@@ -16,11 +16,11 @@ Ex. :
     - Name = test
 Un fichier nommé test.screen.dart sera créé dans le répertoire choisit et le composant sera nommé TestScreen.
 
-![Choix de feature](./images/1.png)
-![Sélection du chemin](./images/2.png)
-![Sélection du type](./images/3.png)
-![Saisi du nom de base du fichier](./images/4.png)
-![Résultat de création du fichier](./images/5.png)
+![Choix de feature](images/1.png)
+![Sélection du chemin](images/2.png)
+![Sélection du type](images/3.png)
+![Saisi du nom de base du fichier](images/4.png)
+![Résultat de création du fichier](images/5.png)
 
 
 ## Requirements
