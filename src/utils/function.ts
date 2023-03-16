@@ -13,9 +13,9 @@ export function errorMessage(message: string) {
     vscode.window.showErrorMessage(message);
 }
 
-export const execShell = (cmd: string) =>
+export const execShell = (cmd: string, cwd?: string) =>
     new Promise<string>((resolve, reject) => {
-        cp.exec(cmd, (err, out) => {
+        cp.exec(cmd, { cwd: cwd }, (err, out) => {
             if (err) {
                 return reject(err);
             }

@@ -10,3 +10,9 @@ Check [Keep a Changelog](https://keepachangelog.com/) for recommendations on how
 
 ## v0.0.2 Changes :
 * Active README file
+
+## v0.0.3 Changes :
+* Init GetX feature has been activated : ![](images/6.png)
+    - Create Theme feature
+    - Create Splash screen
+    - Create MainApp, Routes and Routing
