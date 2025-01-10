@@ -22,6 +22,10 @@
         "title": "GK flutter GetX init"
       },
       {
+        "command": "gk-flutter-getx-pattern.riverpodInit",
+        "title": "GK flutter Riverpod init"
+      },
+      {
         "command": "gk-flutter-getx-pattern.statefullfile",
         "title": "GK flutter statefull file"
       },

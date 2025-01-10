@@ -1,5 +1,5 @@
 export const createFeaturesConstantes = () =>
-`// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+  `// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
 
@@ -19,7 +19,7 @@ const IS_FIRST_OPEN_APP_KEY =
 
 
 export const createStylesConstantes = () =>
-`// ignore_for_file: constant_identifier_names
+  `// ignore_for_file: constant_identifier_names
 
 import 'package:flutter/animation.dart';
 
@@ -28,7 +28,7 @@ const BUTTON_MAX_SIZE = Size(300, 45);
 `;
 
 export const createColorsConstantes = () =>
-`import 'package:flutter/material.dart';
+  `import 'package:flutter/material.dart';
 
 const Color primaryColor = Colors.deepPurpleAccent;
 const Color primaryConstratColor = Colors.deepPurple;
@@ -70,8 +70,8 @@ const Color vtcColor = Color(0xff656565);
 const Color camionColor = Color(0xff76A50D);
 `;
 
-export const createAppTheme = (appNameID:string) =>
-`import 'package:flutter/material.dart';
+export const createAppTheme = (appNameID: string) =>
+  `import 'package:flutter/material.dart';
 import 'package:${appNameID}/ui/styles/colors.style.dart';
 import 'package:${appNameID}/ui/styles/constants.style.dart';
 
@@ -224,8 +224,8 @@ abstract class AppTheme {
 }
 `;
 
-export const createThemeController = (appNameID:string) =>
-`import 'package:flutter/material.dart';
+export const createThemeController = (appNameID: string) =>
+  `import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:${appNameID}/features/constants.feature.dart';
@@ -242,8 +242,8 @@ class ThemeController extends GetxController {
 }
 `;
 
-export const createMainProvider = (appNameID:string) =>
-`import 'package:get/get.dart';
+export const createMainProvider = (appNameID: string) =>
+  `import 'package:get/get.dart';
 import 'package:${appNameID}/features/constants.feature.dart';
 
 class MainProvider extends GetConnect {
@@ -256,7 +256,7 @@ class MainProvider extends GetConnect {
 `;
 
 export const createRoutes = () =>
-`abstract class Routes {
+  `abstract class Routes {
     static const splash = '/splash';
     static const onboarding = '/onboarding';
     static const auth = '/auth';
@@ -266,8 +266,8 @@ export const createRoutes = () =>
     static const checkotp = '/check-otp';
 }`;
 
-export const createAppRouting = (appNameID:string) =>
-`import 'package:get/get.dart';
+export const createAppRouting = (appNameID: string) =>
+  `import 'package:get/get.dart';
 import 'package:${appNameID}/app/routes.dart';
 import 'package:${appNameID}/ui/screens/splash/splash.screen.dart';
 
@@ -283,8 +283,8 @@ class AppRouting {
 }
 `;
 
-export const createMainApp = (appNameID:string) =>
-`import 'package:flutter/material.dart';
+export const createMainApp = (appNameID: string) =>
+  `import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:${appNameID}/app/app.routing.dart';
@@ -335,8 +335,8 @@ class _MainAppState extends State<MainApp> {
 }
 `;
 
-export const createUtilsFunctions = (appNameID:string) =>
-`import 'package:flutter/material.dart';
+export const createUtilsFunctions = (appNameID: string) =>
+  `import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:${appNameID}/ui/styles/colors.style.dart';
 
@@ -486,7 +486,7 @@ void showSnackbar(
 `;
 
 export const createUtilsInternetConnectivity = () =>
-`import 'package:connectivity_plus/connectivity_plus.dart';
+  `import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class InternetConnectivity {
@@ -503,8 +503,8 @@ class InternetConnectivity {
 }
 `;
 
-export const rewriteMainFile = (appNameID:string) =>
-`import 'package:flutter/foundation.dart';
+export const rewriteMainFile = (appNameID: string) =>
+  `import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -547,11 +547,11 @@ Future<void> main() async {
 }
 `;
 
-export const rewriteTestFile = (appNameID:string) =>
-`// This is a basic Flutter widget test.
+export const rewriteTestFile = (appNameID: string) =>
+  `// This is a basic Flutter widget test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
+// utility in your flutter_test package. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
@@ -578,3 +578,49 @@ void main() {
   });
 }
 `;
+
+export const createHttpException = () => `
+class HttpException implements Exception {
+  final String message;
+  final int statusCode;
+
+  HttpException(this.message, this.statusCode);
+
+  @override
+  String toString() => message;
+}`;
+
+export const createHandleResponse = () => `
+import 'package:http/http.dart' as http;
+import 'exception.dart';
+
+dynamic handleResponse(http.Response response) {
+  switch (response.statusCode) {
+    case 200:
+      return response.body;
+    case 400:
+      throw HttpException('Bad request', 400);
+    case 401:
+      throw HttpException('Unauthorized', 401);
+    case 403:
+      throw HttpException('Forbidden', 403);
+    case 404:
+      throw HttpException('Not found', 404);
+    default:
+      throw HttpException('Server error', 500);
+  }
+}`;
+
+export const createI18n = (lang: string) => `
+Map<String, String> ${lang}Translation = {
+  'welcome': '${lang === 'en' ? 'Welcome' : 'Bienvenue'}',
+  // Add more translations
+};`;
+
+export const createTheme = (isDark: boolean) => `
+import 'package:flutter/material.dart';
+
+final ${isDark ? 'darkTheme' : 'lightTheme'} = ThemeData(
+  brightness: ${isDark ? 'Brightness.dark' : 'Brightness.light'},
+  // Add theme configuration
+);`;

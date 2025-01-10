@@ -3,7 +3,7 @@ import * as yaml from 'js-yaml';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { errorMessage, execShell, infoMessage } from '../utils/function';
-import { createAppRouting, createAppTheme, createColorsConstantes, createFeaturesConstantes, createMainApp, createMainProvider, createRoutes, createStylesConstantes, createThemeController, createUtilsFunctions, createUtilsInternetConnectivity, rewriteMainFile, rewriteTestFile } from '../utils/init-getx-utils';
+import { createAppRouting, createAppTheme, createColorsConstantes, createFeaturesConstantes, createHandleResponse, createHttpException, createI18n, createMainApp, createMainProvider, createRoutes, createStylesConstantes, createTheme, createThemeController, createUtilsFunctions, createUtilsInternetConnectivity, rewriteMainFile, rewriteTestFile } from '../utils/init-getx-utils';
 import { createStatefull } from '../utils/statefull.file';
 
 const dependencies = [
@@ -90,74 +90,66 @@ const installationDependances = (mainDir: string, commands: string[]) => {
 };
 
 const creationDossiers = (mainDir: string) => {
+    // Assets
     const assetsFolder = path.join(mainDir, "assets");
     if (!fs.existsSync(assetsFolder)) {
         fs.mkdirSync(assetsFolder);
     }
-    const imagesFolder = path.join(assetsFolder, "images");
-    if (!fs.existsSync(imagesFolder)) {
-        fs.mkdirSync(imagesFolder);
-    }
-    const iconsFolder = path.join(assetsFolder, "icons");
-    if (!fs.existsSync(iconsFolder)) {
-        fs.mkdirSync(iconsFolder);
-    }
 
     const libFolder = path.join(mainDir, "lib");
 
+    // App
     const appFolder = path.join(libFolder, "app");
     if (!fs.existsSync(appFolder)) {
         fs.mkdirSync(appFolder);
     }
+
+    // Components
+    const componentsFolder = path.join(libFolder, "components");
+    if (!fs.existsSync(componentsFolder)) {
+        fs.mkdirSync(componentsFolder);
+        fs.mkdirSync(path.join(componentsFolder, "widgets"));
+        fs.mkdirSync(path.join(componentsFolder, "styles"));
+        fs.mkdirSync(path.join(componentsFolder, "validators"));
+    }
+
+    // Features
     const featuresFolder = path.join(libFolder, "features");
     if (!fs.existsSync(featuresFolder)) {
         fs.mkdirSync(featuresFolder);
-    }
-    const themeFeature = path.join(mainDir, "lib", "features", "theme");
-    if (!fs.existsSync(themeFeature)) {
-        fs.mkdirSync(themeFeature);
-    }
-    const themeFeatureCtrl = path.join(mainDir, "lib", "features", "theme", "controllers");
-    if (!fs.existsSync(themeFeatureCtrl)) {
-        fs.mkdirSync(themeFeatureCtrl);
-    }
-    const globalFeature = path.join(mainDir, "lib", "features", "global");
-    if (!fs.existsSync(globalFeature)) {
-        fs.mkdirSync(globalFeature);
-    }
-    const globalFeatureProviders = path.join(mainDir, "lib", "features", "global", "providers");
-    if (!fs.existsSync(globalFeatureProviders)) {
-        fs.mkdirSync(globalFeatureProviders);
-    }
-    const uiFolder = path.join(libFolder, "ui");
-    if (!fs.existsSync(uiFolder)) {
-        fs.mkdirSync(uiFolder);
-    }
-    const screensFolder = path.join(uiFolder, "screens");
-    if (!fs.existsSync(screensFolder)) {
-        fs.mkdirSync(screensFolder);
+        fs.mkdirSync(path.join(featuresFolder, "http"));
+        fs.mkdirSync(path.join(featuresFolder, "global"));
+        fs.mkdirSync(path.join(featuresFolder, "global/models"));
+        fs.mkdirSync(path.join(featuresFolder, "global/providers"));
     }
 
-    const splash = path.join(screensFolder, "splash");
-    if (!fs.existsSync(splash)) {
-        fs.mkdirSync(splash);
+    // i18n
+    const i18nFolder = path.join(libFolder, "i18n");
+    if (!fs.existsSync(i18nFolder)) {
+        fs.mkdirSync(i18nFolder);
     }
 
-    const stylesFolder = path.join(uiFolder, "styles");
-    if (!fs.existsSync(stylesFolder)) {
-        fs.mkdirSync(stylesFolder);
-    }
-    const themeFolder = path.join(stylesFolder, "theme");
+    // Theme
+    const themeFolder = path.join(libFolder, "theme");
     if (!fs.existsSync(themeFolder)) {
         fs.mkdirSync(themeFolder);
     }
-    const widgetsFolder = path.join(uiFolder, "widgets");
-    if (!fs.existsSync(widgetsFolder)) {
-        fs.mkdirSync(widgetsFolder);
-    }
+
+    // Utils
     const utilsFolder = path.join(libFolder, "utils");
     if (!fs.existsSync(utilsFolder)) {
         fs.mkdirSync(utilsFolder);
+        fs.mkdirSync(path.join(utilsFolder, "functions"));
+        fs.mkdirSync(path.join(utilsFolder, "constants"));
+    }
+
+    // UI
+    const uiFolder = path.join(libFolder, "ui");
+    if (!fs.existsSync(uiFolder)) {
+        fs.mkdirSync(uiFolder);
+        fs.mkdirSync(path.join(uiFolder, "screens"));
+        fs.mkdirSync(path.join(uiFolder, "screens/styles"));
+        fs.mkdirSync(path.join(uiFolder, "screens/widgets"));
     }
 };
 
@@ -224,6 +216,39 @@ const creationFichiers = (mainDir: string, appNameID: string) => {
 
     const testFile = path.join(mainDir, "test", "widget_test.dart");
     fs.writeFileSync(testFile, rewriteTestFile(appNameID));
+
+    // HTTP files
+    const httpException = path.join(mainDir, "lib/features/http/exception.dart");
+    if (!fs.existsSync(httpException)) {
+        fs.appendFileSync(httpException, createHttpException());
+    }
+
+    const handleResponse = path.join(mainDir, "lib/features/http/handle_response.dart");
+    if (!fs.existsSync(handleResponse)) {
+        fs.appendFileSync(handleResponse, createHandleResponse());
+    }
+
+    // i18n files
+    const enTranslation = path.join(mainDir, "lib/i18n/en.dart");
+    if (!fs.existsSync(enTranslation)) {
+        fs.appendFileSync(enTranslation, createI18n('en'));
+    }
+
+    const frTranslation = path.join(mainDir, "lib/i18n/fr.dart");
+    if (!fs.existsSync(frTranslation)) {
+        fs.appendFileSync(frTranslation, createI18n('fr'));
+    }
+
+    // Theme files
+    const darkTheme = path.join(mainDir, "lib/theme/dark_theme.dart");
+    if (!fs.existsSync(darkTheme)) {
+        fs.appendFileSync(darkTheme, createTheme(true));
+    }
+
+    const lightTheme = path.join(mainDir, "lib/theme/light_theme.dart");
+    if (!fs.existsSync(lightTheme)) {
+        fs.appendFileSync(lightTheme, createTheme(false));
+    }
 };
 
 export default initGetXCommand;

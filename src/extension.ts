@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import initGetXCommand from './commands/init-getx';
+import initRiverpodCommand from './commands/init-riverpod';
 import statefullCommand from './commands/statefull-file';
 import statelessCommand from './commands/stateless-file';
 
@@ -20,6 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(statefullCommand);
 	context.subscriptions.push(statelessCommand);
 	context.subscriptions.push(initGetXCommand);
+	context.subscriptions.push(initRiverpodCommand);
 }
 
 // This method is called when your extension is deactivated
