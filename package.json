@@ -1,12 +1,12 @@
 {
-  "name": "gk-flutter-getx-pattern",
-  "displayName": "GK Flutter GetX Pattern",
-  "publisher": "GnyKoua",
+  "name": "gk-flutter",
+  "displayName": "GK Flutter",
+  "publisher": "GKDEV",
   "description": "GK custom flutter design pattern using GetX",
   "repository": "https://github.com/GnyKoua/GK-FLUTTER-GETX-VSCODE-EXTENSION.git",
   "icon": "images/avatar.png",
   "badges": [],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -18,19 +18,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "gk-flutter-getx-pattern.getxinit",
+        "command": "gk-flutter.getxinit",
         "title": "GK flutter GetX init"
       },
       {
-        "command": "gk-flutter-getx-pattern.riverpodInit",
+        "command": "gk-flutter.riverpodInit",
         "title": "GK flutter Riverpod init"
       },
       {
-        "command": "gk-flutter-getx-pattern.statefullfile",
+        "command": "gk-flutter.statefullfile",
         "title": "GK flutter statefull file"
       },
       {
-        "command": "gk-flutter-getx-pattern.statelessfile",
+        "command": "gk-flutter.statelessfile",
         "title": "GK flutter stateless file"
       }
     ]
